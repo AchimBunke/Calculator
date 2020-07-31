@@ -1,0 +1,24 @@
+syntax = expr;
+
+expr = term, expr1;
+expr1 = ("+" | "-"), term, expr1 | ;
+term = factor, term1;
+term1 = ("*" | "/" | "%"), factor, term1 | ;
+
+factor = "(", expr, ")" | number | absolute | maximum | minimum | summation | product | root | power;
+
+absolute = "abs(", expr, ")";
+maximum = "max(", expr, {",", expr}, ")";
+minimum = "min(", expr, {",", expr}, ")";
+summation = "sum(", expr, {",", expr}, ")";
+product = "prod(", expr, {",", expr}, ")";
+root = "sqrt(", expr, ")";
+power = "pow(", expr, ",", expr, ")";
+
+number = float | integer;
+float = integer, ".", digit, {digit};
+integer = ["-"], (zero | nonzero, {digit});
+
+zero = "0";
+nonzero = "1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9";
+digit = "1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"0";
