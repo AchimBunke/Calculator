@@ -21,6 +21,8 @@
     - square root 'sqrt(x)'
     - power 'pow(x,y)'
     
+ -  See ebnf.txt for the full grammar in EBNF
+    
 ##  How to compile and use the calculator
 
   **Linux:**
