@@ -73,11 +73,26 @@
   extern FILE * yyin;
   void yyerror (char const *s);
   #include <math.h>
-  
+
+/*
+	The following variables are used to collect all values from the maximum | minimum | summation | product
+	rules that allow any amount of expressions seperated by the character ','
+*/
+
+//	This multidimensional array allows the use of 100 max, min, sum, prod functions with 50 variables each
   float arr[100][50];
-  int len[100]={[0 ... 99]=0};
-  int index = 0;
   
+//	The count of variables in each function
+  int len[100]={[0 ... 99]=0};
+  
+//	Index to the current position in arr
+  int index = 0;
+
+/*	
+summary:	Traverse an array and apply the given function in each iteration
+param (*f):	A pointer to a function which should be used
+param a:	The index to the array in arr
+*/
   float traverse(void (*f)(float*,float),int a){
   	float *ret = (float *)malloc(sizeof(float));
   	*ret = arr[a][0];
@@ -86,22 +101,45 @@
   	}
   	return *ret;
   }
+  
+/*	
+summary:	Finds the minimum of two values
+param curr:	A pointer to the previous minimum
+param x:	The value which should be compared to the current minimum
+*/
   void min(float* curr, float x){
   	if(*curr>x){*curr = x;}
   }
+  
+/*	
+summary:	Finds the maximum of two values
+param curr:	A pointer to the previous maximum
+param x:	The value which should be compared to the current maximum
+*/
   void max(float* curr,float x){
   	if(*curr<x){*curr = x;}
   }
+  
+/*	
+summary:	Calculates the sum of two values
+param curr:	A pointer to the current sum
+param x:	The value which should be added to the current sum
+*/
  void sum(float* curr,float x){
   	*curr += x;
   }
+  
+/*	
+summary:	Calculates the product of two values
+param curr:	A pointer to the current product
+param x:	The value which should be multiplied to the current product
+*/
   void prod(float* curr,float x){
   	*curr *= x;
   }
   
-  
 
-#line 105 "y.tab.c"
+#line 143 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -193,11 +231,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 36 "./src/calc.y"
+#line 75 "./src/calc.y"
 
 	float fval;
 
-#line 201 "y.tab.c"
+#line 239 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -574,10 +612,10 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    58,    58,    59,    63,    64,    65,    69,    70,    71,
-      72,    76,    77,    78,    79,    80,    81,    82,    83,    84,
-      88,    92,    93,   100,   101,   108,   109,   116,   117,   124,
-     128,   132,   133,   134,   135,   140,   141
+       0,    97,    97,    98,   102,   103,   104,   108,   109,   110,
+     111,   115,   116,   117,   118,   119,   120,   121,   122,   123,
+     127,   131,   132,   143,   144,   155,   156,   167,   168,   179,
+     183,   187,   188,   189,   190,   195,   201
 };
 #endif
 
@@ -1416,157 +1454,178 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 58 "./src/calc.y"
+#line 97 "./src/calc.y"
                                         {printf("Result:  %g\n",(yyvsp[-1].fval));}
-#line 1422 "y.tab.c"
+#line 1460 "y.tab.c"
     break;
 
   case 4:
-#line 63 "./src/calc.y"
-                                {(yyval.fval) = (yyvsp[-2].fval) + (yyvsp[0].fval);}
-#line 1428 "y.tab.c"
+#line 102 "./src/calc.y"
+                                        {(yyval.fval) = (yyvsp[-2].fval) + (yyvsp[0].fval);}
+#line 1466 "y.tab.c"
     break;
 
   case 5:
-#line 64 "./src/calc.y"
+#line 103 "./src/calc.y"
                                 {(yyval.fval) = (yyvsp[-2].fval) - (yyvsp[0].fval);}
-#line 1434 "y.tab.c"
+#line 1472 "y.tab.c"
     break;
 
   case 7:
-#line 69 "./src/calc.y"
+#line 108 "./src/calc.y"
                                 {(yyval.fval) = (yyvsp[-2].fval) * (yyvsp[0].fval);}
-#line 1440 "y.tab.c"
+#line 1478 "y.tab.c"
     break;
 
   case 8:
-#line 70 "./src/calc.y"
+#line 109 "./src/calc.y"
                                 {(yyval.fval) = (yyvsp[-2].fval) / (yyvsp[0].fval);}
-#line 1446 "y.tab.c"
+#line 1484 "y.tab.c"
     break;
 
   case 9:
-#line 71 "./src/calc.y"
+#line 110 "./src/calc.y"
                                 {(yyval.fval) = (int)(yyvsp[-2].fval) % (int)(yyvsp[0].fval);}
-#line 1452 "y.tab.c"
+#line 1490 "y.tab.c"
     break;
 
   case 11:
-#line 76 "./src/calc.y"
+#line 115 "./src/calc.y"
                                                         {(yyval.fval) = (yyvsp[-1].fval);}
-#line 1458 "y.tab.c"
+#line 1496 "y.tab.c"
     break;
 
   case 20:
-#line 88 "./src/calc.y"
+#line 127 "./src/calc.y"
                                                         {(yyval.fval) = fabs((yyvsp[-1].fval));}
-#line 1464 "y.tab.c"
+#line 1502 "y.tab.c"
     break;
 
   case 21:
-#line 92 "./src/calc.y"
-                                                        {(yyval.fval) = (yyvsp[-1].fval);}
-#line 1470 "y.tab.c"
+#line 131 "./src/calc.y"
+                                                                {(yyval.fval) = (yyvsp[-1].fval);}
+#line 1508 "y.tab.c"
     break;
 
   case 22:
-#line 93 "./src/calc.y"
-                                                                {arr[index][len[index]++]=(yyvsp[-2].fval);
+#line 132 "./src/calc.y"
+                                                                {
+								//	Add the value of expr to the current array
+								arr[index][len[index]++]=(yyvsp[-2].fval);
+								//	Calculate the maximum of the current array
 								(yyval.fval) = traverse(max,index);
-								len[index]=0;
-								index++;}
-#line 1479 "y.tab.c"
+								
+								index++;
+								}
+#line 1521 "y.tab.c"
     break;
 
   case 23:
-#line 100 "./src/calc.y"
-                                                        {(yyval.fval) = (yyvsp[-1].fval);}
-#line 1485 "y.tab.c"
+#line 143 "./src/calc.y"
+                                                                {(yyval.fval) = (yyvsp[-1].fval);}
+#line 1527 "y.tab.c"
     break;
 
   case 24:
-#line 101 "./src/calc.y"
-                                                                {arr[index][len[index]++]=(yyvsp[-2].fval);
+#line 144 "./src/calc.y"
+                                                                {
+								//	Add the value of expr to the current array
+								arr[index][len[index]++]=(yyvsp[-2].fval);
+								//	Calculate the minimum of the current array
 								(yyval.fval) = traverse(min,index);
-								len[index]=0;
-								index++;}
-#line 1494 "y.tab.c"
+								
+								index++;
+								}
+#line 1540 "y.tab.c"
     break;
 
   case 25:
-#line 108 "./src/calc.y"
-                                                        {(yyval.fval) = (yyvsp[-1].fval);}
-#line 1500 "y.tab.c"
+#line 155 "./src/calc.y"
+                                                                {(yyval.fval) = (yyvsp[-1].fval);}
+#line 1546 "y.tab.c"
     break;
 
   case 26:
-#line 109 "./src/calc.y"
-                                                                {arr[index][len[index]++]=(yyvsp[-2].fval);
+#line 156 "./src/calc.y"
+                                                                {
+								//	Add the value of expr to the current array
+								arr[index][len[index]++]=(yyvsp[-2].fval);
+								//	Calculate the sum of the current array
 								(yyval.fval) = traverse(sum,index);
-								len[index]=0;
-								index++;}
-#line 1509 "y.tab.c"
+
+								index++;
+								}
+#line 1559 "y.tab.c"
     break;
 
   case 27:
-#line 116 "./src/calc.y"
-                                                        {(yyval.fval) = (yyvsp[-1].fval);}
-#line 1515 "y.tab.c"
+#line 167 "./src/calc.y"
+                                                                {(yyval.fval) = (yyvsp[-1].fval);}
+#line 1565 "y.tab.c"
     break;
 
   case 28:
-#line 117 "./src/calc.y"
-                                                                {arr[index][len[index]++]=(yyvsp[-2].fval);
+#line 168 "./src/calc.y"
+                                                                {
+								//	Add the value of expr to the current array
+								arr[index][len[index]++]=(yyvsp[-2].fval);
+								//	Calculate the product of the current array
 								(yyval.fval) = traverse(prod,index);
-								len[index]=0;
-								index++;}
-#line 1524 "y.tab.c"
+
+								index++;
+								}
+#line 1578 "y.tab.c"
     break;
 
   case 29:
-#line 124 "./src/calc.y"
+#line 179 "./src/calc.y"
                                                         {(yyval.fval) = sqrt((yyvsp[-1].fval));}
-#line 1530 "y.tab.c"
+#line 1584 "y.tab.c"
     break;
 
   case 30:
-#line 128 "./src/calc.y"
+#line 183 "./src/calc.y"
                                                                 {(yyval.fval) = pow((yyvsp[-3].fval),(yyvsp[-1].fval));}
-#line 1536 "y.tab.c"
+#line 1590 "y.tab.c"
     break;
 
   case 31:
-#line 132 "./src/calc.y"
-                        {(yyval.fval) = (yyvsp[0].fval);}
-#line 1542 "y.tab.c"
+#line 187 "./src/calc.y"
+                                                        {(yyval.fval) = (yyvsp[0].fval);}
+#line 1596 "y.tab.c"
     break;
 
   case 32:
-#line 133 "./src/calc.y"
-                        {(yyval.fval) = (yyvsp[0].fval);}
-#line 1548 "y.tab.c"
+#line 188 "./src/calc.y"
+                                                                {(yyval.fval) = (yyvsp[0].fval);}
+#line 1602 "y.tab.c"
     break;
 
   case 33:
-#line 134 "./src/calc.y"
-                                                          {(yyval.fval) = (yyvsp[-1].fval)*-1;}
-#line 1554 "y.tab.c"
+#line 189 "./src/calc.y"
+                                                                {(yyval.fval) = (yyvsp[-1].fval)*-1;}
+#line 1608 "y.tab.c"
     break;
 
   case 34:
-#line 135 "./src/calc.y"
+#line 190 "./src/calc.y"
                                                         {(yyval.fval) = (yyvsp[-1].fval)*-1;}
-#line 1560 "y.tab.c"
+#line 1614 "y.tab.c"
     break;
 
   case 35:
-#line 140 "./src/calc.y"
-                                        {arr[index][len[index]]=(yyvsp[-1].fval);len[index]++;}
-#line 1566 "y.tab.c"
+#line 195 "./src/calc.y"
+                                        {
+					//	Add the value from expr to the array of the current function
+					arr[index][len[index]]=(yyvsp[-1].fval);
+					//	Update length of the array
+					len[index]++;
+					}
+#line 1625 "y.tab.c"
     break;
 
 
-#line 1570 "y.tab.c"
+#line 1629 "y.tab.c"
 
       default: break;
     }
@@ -1798,7 +1857,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 144 "./src/calc.y"
+#line 204 "./src/calc.y"
 
 
 void  yyerror(char const *s) {
