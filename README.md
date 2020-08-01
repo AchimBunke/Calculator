@@ -22,6 +22,8 @@
     - power 'pow(x,y)'
     
  -  See ebnf.txt for the full grammar in EBNF
+ -  See test/testfile_correct for examples for expressions
+ -  See test/testfile_error for examples for invalid expressions
     
 ##  How to compile and use the calculator
 
@@ -30,5 +32,9 @@
 - Navigate to the directory with the Makefile
 - Call 'make calc'
 - Call './calc [*file with the expression to be calculated*] '
+
+  **Example:**
+  
+  $ ./calc test/testfile_correct
 
     
